@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نبذة عنا - منتجع الجولف الفاخر</title>
+        <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #87ebeb;
+            --secondary-color:#1e99d2 ;
+            --text-color: #333;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .about-section {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* نسبة 16:9 */
+            margin: 2rem 0;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .timeline-item {
+            padding: 1rem;
+            margin: 2rem 0;
+            position: relative;
+            border-right: 3px solid var(--primary-color);
+            margin-right: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .team-member img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/th (3).jpeg.jpg" alt="شعار منتجع الجولف الفاخر" class="logo animated fadeInDown">
+        <h1>نبذة عن منتجع الجولف الفاخر</h1>
+    </header>
+    <div class="date-visits animated fadeIn">
+        <div class="date-time-container">
+
+        </div>
+        <div id="visit-counter">عدد الزيارات: <span>1</span></div>
+        <div class="clock" id="clock"></div>
+    </div>
+    <nav class="animated slideInLeft">
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html"> عن المنتجع</a></li>
+            <li><a href="facilities.html">المرافق</a></li>
+            <li><a href="packages.html">الحزم المخصصة</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="gallery.html">معرض الصورة  </a></li>
+            <li><a href="booking.html" style="background-color: var(--primary-color); font-weight: bold;">احجز الآن</a></li>
+        </ul>
+    </nav>
+
+    <div class="accessibility-controls animated slideInRight">
+
+        <button id="increase-button" onclick="increaseFontSize()">+</button>
+        <button id="decrease-button" onclick="decreaseFontSize()">-</button>
+        <button onclick="toggleSpeech()">تحويل النص إلى كلام</button>
+    </div>
+
+    <main class="main-content">
+        <section class="about-section">
+            <h2>قصتنا</h2>
+            <p>منذ تأسيسه في عام 2010، أصبح منتجع الجولف الفاخر وجهة مميزة للاعبي الجولف من جميع أنحاء العالم. يمتد المنتجع على مساحة 500 هكتار من المناظر الطبيعية الخلابة، ويضم ثلاثة ملاعب جولف عالمية المستوى، بما في ذلك ملعب "سي فيو" الشهير.</p>
+            
+            <div class="video-container">
+                <video controls poster="images/th (6).jpeg.jpg">
+                    <source src="videos/ملعب غولف من _العصر الذهبي_ يعود بك بالزمن.. مع إطلالات رائعة على لوس أنجلوس.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو
+                </video>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>إحصائيات المنتجع</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div>ملاعب جولف عالمية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200</div>
+                    <div>غرفة وجناح</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50,000+</div>
+                    <div>زائر سنوياً</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div>مدرب محترف</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>تاريخنا</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>2010</h3>
+                    <p>تأسيس المنتجع وافتتاح الملعب الأول</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2012</h3>
+                    <p>افتتاح ملعب "سي فيو" الشهير</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2015</h3>
+                    <p>توسعة المنتجع وإضافة الملعب الثالث</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2020</h3>
+                    <p>تحديث المرافق وإضافة التقنيات الرقمية الحديثة</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2025</h3>
+                    <p>افتتاح مركز التدريب المتقدم</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>فريقنا</h2>
+            <div class="team-container">
+                <div class="team-member">
+                    <img src="images/مدير العام.jpeg.jpg" alt="المدير التنفيذي">
+                    <h3>هولق السعيد</h3>
+                    <p>المدير محترفه</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/مدربه محترفه.jpeg.jpg" alt="مدير الجولف">
+                    <h3>سارة الخالد</h3>
+                    <p>مديرة الجولف</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/مدير النضافه.jpeg.jpg" alt="المدرب الرئيسي">
+                    <h3>محمد العلي</h3>
+                    <p>المدرب الرئيسي</p>
+                </div>
+            </div>
+        </section>
+    </main>
+        <footer class="footer animated fadeInUp">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p> +966 12 345 6789</p>
+                    <p>✉️ info@luxurygolfresort.com</p>
+                    <p> طريق الساحل، المنطقة السياحية</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="images/fesahs.jpeg" alt="https://www.facebook.com/"></a>
+                <a href="#"><img src="images/instsarm.jpeg" alt="https://www.instagram.com/"></a>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © 2025 منتجع الجولف الفاخر</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+</body>
+</html>

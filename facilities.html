@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرافق المنتجع - منتجع الجولف الفاخر</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color:  #87ebeb;
+            --secondary-color: #1ec6d2;
+            --text-color: #333;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .facility-section {
+            background-color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .facility-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .facility-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .facility-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .facility-media {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .facility-video {
+            width: 100%;
+            height: 300px;
+            border-radius: 5px;
+        }
+
+        /* النافذة المنبثقة */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--white);
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .facility-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/th (3).jpeg.jpg" alt="شعار منتجع الجولف الفاخر" class="logo animated fadeInDown">
+        <h1>مرافق المنتجع</h1>
+    </header>
+    <div class="date-visits animated fadeIn">
+        <div class="date-time-container">
+
+        </div>
+        <div id="visit-counter">عدد الزيارات: <span>1</span></div>
+        <div class="clock" id="clock"></div></div>
+      </div>
+    <nav class="animated slideInLeft">
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html"> عن المنتجع</a></li>
+            <li><a href="facilities.html">المرافق</a></li>
+            <li><a href="packages.html">الحزم المخصصة</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="gallery.html">معرض الصورة  </a></li>
+            <li><a href="booking.html" style="background-color: var(--primary-color); font-weight: bold;">احجز الآن</a></li>
+        </ul>
+    </nav>
+
+    <div class="accessibility-controls animated slideInRight">
+        <button id="increase-button" onclick="increaseFontSize()">+</button>
+        <button id="decrease-button" onclick="decreaseFontSize()">-</button>
+        <button onclick="toggleSpeech()">تحويل النص إلى كلام</button>
+    </div>
+    <main class="main-content">
+        <!-- ملاعب الجولف -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>ملاعب الجولف</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <h3>ملعب "سي فيو" الشهير</h3>
+                    <p>ملعب استثنائي يطل على البحر مع 18 حفرة مصممة بمعايير عالمية. يعتبر من أفضل ملاعب الجولف في المنطقة.</p>
+                    <h3>الملاعب الإضافية</h3>
+                    <ul>
+                        <li>ملعب الواحة - 18 حفرة</li>
+                        <li>ملعب النخيل - 18 حفرة</li>
+                    </ul>
+                </div>
+                <div class="facility-media">
+                    <img src="images/صوره سيفو الشهير.jpeg.jpg" alt="ملعب سي فيو" class="facility-image" onclick="openModal(this.src)">
+                    <video class="facility-video" controls>
+                        <source src="videos/ملعب غولف من _العصر الذهبي_ يعود بك بالزمن.. مع إطلالات رائعة على لوس أنجلوس.mp4" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- النوادي -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>النوادي</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <h3>نادي الجولف الرئيسي</h3>
+                    <p>نادي فاخر يضم كافة المرافق الضرورية للاعبي الجولف، مع غرف تغيير وخزائن شخصية.</p>
+                    <h3>النادي الصحي</h3>
+                    <p>مرافق رياضية متكاملة، سبا، وحمام سباحة.</p>
+                </div>
+                <div class="facility-media">
+                    <img src="images/نادي اجتماعي.jpeg.jpg" alt="النادي الرئيسي" class="facility-image" onclick="openModal(this.src)">
+                </div>
+            </div>
+        </section>
+
+        <!-- الإقامة -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>الإقامة في الفندق</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <h3>الغرف والأجنحة</h3>
+                    <ul>
+                        <li>غرف فاخرة مطلة على الملاعب</li>
+                        <li>أجنحة تنفيذية</li>
+                        <li>فلل خاصة</li>
+                    </ul>
+                </div>
+                <div class="facility-media">
+                    <img src="images/غرف.jpeg.jpg" alt="غرفة فندقية" class="facility-image" onclick="openModal(this.src)">
+                </div>
+            </div>
+        </section>
+
+        <!-- المطاعم والمقاهي -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>المطاعم والمقاهي</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <h3>المطاعم</h3>
+                    <ul>
+                        <li>مطعم الجولف الرئيسي</li>
+                        <li>مطعم المأكولات العالمية</li>
+                        <li>مقهى الشرفة</li>
+                    </ul>
+                </div>
+                <div class="facility-media">
+                    <img src="images/مطعم.jfif.jpg" alt="المطعم الرئيسي" class="facility-image" onclick="openModal(this.src)">
+                </div>
+            </div>
+        </section>
+
+        <!-- متجر المحترفين -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>متجر المحترفين</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <p>متجر متخصص يقدم أحدث معدات الجولف والملابس الرياضية من أشهر الماركات العالمية.</p>
+                </div>
+                <div class="facility-media">
+                    <img src="images/نادي رياضي.jpeg.jpg" alt="متجر المحترفين" class="facility-image" onclick="openModal(this.src)">
+                </div>
+            </div>
+        </section>
+
+        <!-- الأنشطة الأخرى -->
+        <section class="facility-section">
+            <div class="facility-header" onclick="toggleSection(this)">
+                <h2>الأنشطة والخدمات الإضافية</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="facility-content">
+                <div class="facility-info">
+                    <ul>
+                        <li>ساحة تدريب مضاءة بالأنوار الكاشفة</li>
+                        <li>دروس الجولف للمبتدئين والمحترفين</li>
+                        <li>التدريب الرقمي باستخدام أحدث التقنيات</li>
+                        <li>خدمة المساعدة على حمل أدوات الجولف</li>
+                    </ul>
+                </div>
+                <div class="facility-media">
+                    <img src="images/th (6).jpeg.jpg" alt="ساحة التدريب" class="facility-image" onclick="openModal(this.src)">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- النافذة المنبثقة -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="صورة مكبرة">
+        </div>
+    </div>
+
+    <script>
+        // تبديل عرض/إخفاء محتوى القسم
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'grid';
+                icon.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '◀';
+            }
+        }
+
+        // فتح النافذة المنبثقة
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = imgSrc;
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // إغلاق النافذة المنبثقة عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+        <footer class="footer animated fadeInUp">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p> +966 12 345 6789</p>
+                    <p>✉️ info@luxurygolfresort.com</p>
+                    <p> طريق الساحل، المنطقة السياحية</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="images/fesahs.jpeg" alt="فيسبوك"></a>
+                <a href="#"><img src="images/instsarm.jpeg" alt="انستجرام"></a>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © 2025 منتجع الجولف الفاخر</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احجز الآن - منتجع الجولف الفاخر</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #87ebeb;
+            --secondary-color:#1e99d2 ;
+            --text-color: #333;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .booking-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .package-card {
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .package-card.selected {
+            border: 2px solid var(--primary-color);
+            background-color: #f0f7f0;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #34c3e7;
+        }
+
+        .price-summary {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f0f7f0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/th (3).jpeg.jpg" alt="شعار منتجع الجولف الفاخر" class="logo animated fadeInDown">
+        <h1>احجز الآن</h1>
+    </header>
+    <div class="date-visits animated fadeIn">
+        <div class="date-time-container">
+
+        </div>
+        <div id="visit-counter">عدد الزيارات: <span>1</span></div>
+        <div class="clock" id="clock"></div></div>
+    <nav class="animated slideInLeft">
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html"> عن المنتجع</a></li>
+            <li><a href="facilities.html">المرافق</a></li>
+            <li><a href="packages.html">الحزم المخصصة</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="gallery.html">معرض الصورة  </a></li>
+            <li><a href="booking.html" style="background-color: var(--primary-color); font-weight: bold;">احجز الآن</a></li>
+        </ul>
+    </nav>
+
+    <div class="accessibility-controls animated slideInRight">       
+         <button id="increase-button" onclick="increaseFontSize()">+</button>
+        <button id="decrease-button" onclick="decreaseFontSize()">-</button>
+        <button onclick="toggleSpeech()">تحويل النص إلى كلام</button>
+    </div>
+
+    <main class="main-content">
+        <h2>احجز إقامتك في منتجع الجولف الفاخر</h2>
+        
+        <form class="booking-form" id="bookingForm">
+            <div class="form-group">
+                <label for="name">الاسم الكامل</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkIn">تاريخ الوصول</label>
+                <input type="date" id="checkIn" name="checkIn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkOut">تاريخ المغادرة</label>
+                <input type="date" id="checkOut" name="checkOut" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">عدد الضيوف</label>
+                <select id="guests" name="guests" required>
+                    <option value="1">1 شخص</option>
+                    <option value="2">2 شخص</option>
+                    <option value="3">3 أشخاص</option>
+                    <option value="4">4 أشخاص</option>
+                    <option value="5">5 أشخاص</option>
+                </select>
+            </div>
+
+            <h3>اختر الباقة المناسبة</h3>
+            <div class="packages-grid">
+                <div class="package-card" onclick="selectPackage(this, 'basic')">
+                    <h4>الباقة الأساسية</h4>
+                    <p>تشمل الإقامة + جولة جولف</p>
+                    <p class="price">500 ريال / ليلة</p>
+                </div>
+                <div class="package-card" onclick="selectPackage(this, 'premium')">
+                    <h4>الباقة المميزة</h4>
+                    <p>تشمل الإقامة + جولات جولف غير محدودة</p>
+                    <p class="price">800 ريال / ليلة</p>
+                </div>
+                <div class="package-card" onclick="selectPackage(this, 'luxury')">
+                    <h4>الباقة الفاخرة</h4>
+                    <p>تشمل جميع الخدمات + درس خاص</p>
+                    <p class="price">1200 ريال / ليلة</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">ملاحظات إضافية</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+            </div>
+
+            <div class="price-summary" id="priceSummary">
+                <h4>ملخص الحجز</h4>
+                <p>السعر الإجمالي: <span id="totalPrice">0</span> ريال</p>
+            </div>
+
+            <button type="submit" class="submit-btn">تأكيد الحجز</button>
+        </form>
+    </main>
+
+
+        <footer class="footer animated fadeInUp">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p> +966 12 345 6789</p>
+                    <p>✉️ info@luxurygolfresort.com</p>
+                    <p> طريق الساحل، المنطقة السياحية</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="images/fesahs.jpeg" alt="فيسبوك"></a>
+                <a href="#"><img src="images/instsarm.jpeg" alt="انستجرام"></a>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © 2025 منتجع الجولف الفاخر</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+</body>
+</html>

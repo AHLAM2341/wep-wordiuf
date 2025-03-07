@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض الصور والفيديوهات - منتجع الجولف الفاخر</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #87ebeb;
+            --secondary-color:#1e99d2 ;
+            --text-color: #333;
+            --white: #fff;
+            --black: #1A1A1A;
+            --gray: #F5F5F0;
+            --dark-gray: #4A4A4A;
+            --text-color: var(--black);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .tab-button {
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button.active {
+            background-color: var(--primary-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: var(--white);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 85, 48, 0.8);
+            color: var(--white);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .item-overlay {
+            transform: translateY(0);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .modal img, .modal video {
+            max-width: 100%;
+            max-height: 85vh;
+            margin: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/th (3).jpeg.jpg" alt="شعار منتجع الجولف الفاخر" class="logo animated fadeInDown">
+        <h1>معرض الصور والفيديوهات</h1>
+        <p>استكشف جمال وفخامة منتجعنا</p>
+    </header>
+    <div class="date-visits animated fadeIn">
+        <div class="date-time-container">
+
+        </div>
+        <div id="visit-counter">عدد الزيارات: <span>1</span></div>
+        <div class="clock" id="clock"></div></div> </div>
+    <nav class="animated slideInLeft">
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html"> عن المنتج</a></li>
+            <li><a href="facilities.html">المرافق</a></li>
+            <li><a href="packages.html">الحزم المخصصة</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="booking.html" style="background-color: var(--primary-color); font-weight: bold;">احجز الآن</a></li>
+        </ul>
+    </nav>
+
+    <div class="accessibility-controls animated slideInRight">
+        <button id="increase-button" onclick="increaseFontSize()">+</button>
+        <button id="decrease-button" onclick="decreaseFontSize()">-</button>
+        <button onclick="toggleSpeech()">تحويل النص إلى كلام</button>
+    </div>
+    <div class="gallery-container">
+        <div class="gallery-tabs">
+            <button class="tab-button active" onclick="showTab('all')">الكل</button>
+            <button class="tab-button" onclick="showTab('images')">الصور</button>
+            <button class="tab-button" onclick="showTab('videos')">الفيديوهات</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery">
+            <!-- سيتم إضافة العناصر ديناميكياً -->
+        </div>
+    </div>
+
+    <div class="modal" id="mediaModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المعرض
+        const galleryItems = [
+            { type: 'image', src: 'images/ملعب جولف.jpeg', description: 'ملعب الجولف الرئيسي' },
+            { type: 'image', src: 'images/سبا الفاخر.jpeg', description: 'السبا الفاخر' },
+            { type: 'video', src: 'videos/نادي الغزال الرملي بأبوظبي.. هل هذا _أملس_ ملعب غولف في العالم؟.mp4', description: 'جولة في المنتجع' },
+            { type: 'image', src: 'images/مطعم فاخر.jpeg', description: 'المطعم الفاخر' },
+            { type: 'image', src: 'images/حمام سباحه.jpeg', description: 'حمام السباحة' },
+            { type: 'video', src: 'videos/ملعب غولف من _العصر الذهبي_ يعود بك بالزمن.. مع إطلالات رائعة على لوس أنجلوس.mp4', description: 'درس الجولف التعريفي' }
+        ];
+
+        // عرض العناصر في المعرض
+        function renderGallery(filter = 'all') {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            galleryItems.forEach(item => {
+                if (filter === 'all' || filter === item.type + 's') {
+                    const element = document.createElement('div');
+                    element.className = 'gallery-item';
+                    
+                    if (item.type === 'image') {
+                        element.innerHTML = `
+                            <img src="${item.src}" alt="${item.description}" onclick="openModal('${item.src}', 'image')">
+                            <div class="item-overlay">
+                                <p>${item.description}</p>
+                            </div>
+                        `;
+                    } else {
+                        element.innerHTML = `
+                            <video src="${item.src}" onclick="openModal('${item.src}', 'video')">
+                                <source src="${item.src}" type="video/mp4">
+                            </video>
+                            <div class="item-overlay">
+                                <p>${item.description}</p>
+                            </div>
+                        `;
+                    }
+                    
+                    gallery.appendChild(element);
+                }
+            });
+        }
+
+        // تبديل التصنيفات
+        function showTab(filter) {
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+            renderGallery(filter);
+        }
+
+        // فتح النافذة المنبثقة
+        function openModal(src, type) {
+            const modal = document.getElementById('mediaModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            if (type === 'image') {
+                modalContent.innerHTML = `<img src="${src}" alt="صورة معرض">`;
+            } else {
+                modalContent.innerHTML = `
+                    <video controls>
+                        <source src="${src}" type="video/mp4">
+                    </video>
+                `;
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            modal.style.display = 'none';
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = '';
+        }
+
+        // إغلاق النافذة المنبثقة عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('mediaModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // تحميل المعرض عند فتح الصفحة
+        renderGallery();
+    </script>
+        <footer class="footer animated fadeInUp">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p> +966 12 345 6789</p>
+                    <p>✉️ info@luxurygolfresort.com</p>
+                    <p> طريق الساحل، المنطقة السياحية</p>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#"><img src="images/fesahs.jpeg" alt=" "></a>
+                <a href="#"><img src="images/instsarm.jpeg" alt="انستجرام"></a>
+            </div>
+            <div class="footer-bottom">
+                <p>جميع الحقوق محفوظة © 2025 منتجع الجولف الفاخر</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+</body>
+</html>

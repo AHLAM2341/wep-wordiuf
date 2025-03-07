@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منتجع الجولف الفاخر - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/th (3).jpeg.jpg" alt="شعار منتجع الجولف الفاخر" class="logo animated fadeInDown">
+        <h1 class="animated fadeInUp">منتجع الجولف الفاخر</h1>
+    </header>
+
+    <div class="date-visits animated fadeIn">
+        <div class="date-time-container">
+
+        </div>
+        <div id="visit-counter">عدد الزيارات: <span>1</span></div>
+        <div class="clock" id="clock"></div>
+    </div>
+    <nav class="animated slideInLeft">
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="about.html"> عن المنتجع</a></li>
+            <li><a href="facilities.html">المرافق</a></li>
+            <li><a href="packages.html">الحزم المخصصة</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+            <li><a href="gallery.html">معرض الصورة  </a></li>
+            <li><a href="booking.html" style="background-color: var(--primary-color); font-weight: bold;">احجز الآن</a></li>
+        </ul>
+    </nav>
+
+    <div class="accessibility-controls animated slideInRight">
+        <button id="increase-button" onclick="increaseFontSize()">+</button>
+        <button id="decrease-button" onclick="decreaseFontSize()">-</button>
+        <button onclick="toggleSpeech()">تحويل النص إلى كلام</button>
+        <button id="color-button" onclick="toggleColor()">🌓</button>
+    </div>
+
+    <main class="main-content">
+        <div class="hero">
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="videos/ملعب غولف من _العصر الذهبي_ يعود بك بالزمن.. مع إطلالات رائعة على لوس أنجلوس.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <section class="section animated fadeInUp">
+            <h2>من نحن</h2>
+            <p>مرحباً بكم في منتجع الجولف الفاخر، وجهتكم المثالية للاسترخاء والرفاهية. نقدم لكم تجربة جولف استثنائية في أجواء طبيعية ساحرة.</p>
+        </section>
+
+        <section class="section animated fadeInUp">
+            <h2>خدماتنا</h2>
+            <ul>
+                <li>ملعب جولف احترافي 18 حفرة</li>
+                <li>دروس تعليم الجولف للمبتدئين والمحترفين</li>
+                <li>نادي صحي ومنتجع سبا</li>
+                <li>مطاعم فاخرة</li>
+                <li>قاعات مؤتمرات ومناسبات</li>
+            </ul>
+        </section>
+
+        <section class="section animated fadeInUp">
+            <h2>الباقات والعروض</h2>
+            <ul>
+                <li>باقة العضوية السنوية</li>
+                <li>باقة العطلات الأسبوعية</li>
+                <li>باقة تعليم الجولف</li>
+                <li>عروض المجموعات والشركات</li>
+            </ul>
+        </section>
+
+        <section class="section animated fadeInUp">
+            <h2>اتصل بنا</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="الاسم الكامل" required>
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="tel" placeholder="رقم الهاتف">
+                <textarea placeholder="رسالتك" rows="4" required></textarea>
+                <button type="submit">إرسال</button>
+            </form>
+        </section>
+    </main>
+
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>مرحباً بكم في منتجع الجولف الفاخر</h2>
+            <p>نحن سعداء بزيارتكم لموقعنا. اكتشفوا عالماً من الفخامة والاسترخاء في منتجعنا المميز.</p>
+            <a href="booking.html" class="modal-btn primary-btn">احجز الآن</a>
+        </div>
+    </div>
+    
+
+    <footer class="footer animated fadeInUp">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>اتصل بنا</h3>
+                <p> +966 12 345 6789</p>
+                <p>✉️ info@luxurygolfresort.com</p>
+                <p> طريق الساحل، المنطقة السياحية</p>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="images/fesahs.jpeg" alt="https://www.facebook.com/"></a>
+            <a href="#"><img src="images/instsarm.jpeg" alt= "https://www.instagram.com"></a>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2025 منتجع الجولف الفاخر</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
